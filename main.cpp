@@ -1,3 +1,25 @@
+/*
+Descripción:
+El programa, en general, hace uso de clases, punteros y sobre todo matrices (pues son la base de la encriptación practicada). Para el caso de las CLAVES, estas deberán ser ingresadas una por una en el momento que se le pregunta al usuario "Ingrese la clave 1" y de la misma manera cuando pregunte "Ingrese la clave 2". 
+Algunos puntos adicionales:
+Las dos primeras funciones de la clase (rellenar_matriz y  codificador ) son las que se encargan de codificar el mensaje; las siguientes 2 (rellenar_matriz2 y  descodificar ) son las que descodificarán el mensaje; la ultima es una funcion simple de mostrar la matriz que se usa. 
+El programa volvera a preguntar las claves en caso la frase sea mas larga que la cantidad de espacios de la matriz; caso contrario que la frase si entre, rellenara los espacios sobrantes con el siguiente caracter "_" .
+Ejemplo:
+
+Respuesta:  1
+Ingrese el mensaje que desea encriptar: Hola como estas?
+Ingrese la clave 1: 3
+Ingrese la clave 2: 6
+Mensaje codificado: 
+Hotomalosa ? e_cs_
+
+Respuesta:  2
+Ingrese el mensaje que desea descodificar: Hotomalosa ? e_cs_
+Ingrese la clave 1: 3
+Ingrese la clave 2: 6
+Mensaje descodificado: 
+Hola como estas?__
+*/
 #include <iostream>
 #include <string>
 using namespace std;
