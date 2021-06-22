@@ -1,0 +1,63 @@
+Ejemplo1:
+	Cifrado: 
+		Entrada:
+			n = 1003;
+			e = 3;
+			mensaje = comehere#;
+		Salida: 
+			mensaje = 023403530811005403060545
+	Decifrado:
+		Salida: 
+			mensaje = comehere#
+
+Ejemplo2:
+	Cifrado: 
+		Entrada:
+			n = 4027;
+			e = 5;
+			mensaje = comehere#;
+		Salida: 
+			mensaje = 072313371444284923900984
+	Decifrado:
+		Salida: 
+			mensaje = 
+			
+Ejemplo3:
+	Cifrado: 
+		Entrada:
+			n = 1937
+			e = 229
+			mensaje = comehere#;
+		Salida: 
+			mensaje = 185406591574039200660530
+	Decifrado:
+		Salida: 
+			mensaje = comehere#
+		
+Ejemplo4:
+	Cifrado: 
+		Entrada:
+			n = 13843
+			e = 169
+			mensaje = comehere#;
+			p = 127
+			q = 109
+		Salida: 
+			mensaje = 092311250703089024040000000000
+	Decifrado:
+		Salida: 
+			mensaje = 
+			
+Ejemplo5:
+	Cifrado: 
+		Entrada:
+			n = 1003
+			e = 3
+			mensaje = comehere#a;
+			new_mensaje = comehere#a##
+		Salida: 
+			mensaje = 02340353081100540306054500080636
+	Decifrado:
+		Salida: 
+			mensaje = 
+

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/angel/Angel Loayza/UCSP/Algebra_Abstracta/RSA/librerias.h
+NTL/ZZ.h
+-
+iostream
+-
+fstream
+-
+sstream
+-
+cmath
+-
+
+/home/angel/Angel Loayza/UCSP/Algebra_Abstracta/RSA/main.cpp
+NTL/ZZ.h
+-
+iostream
+-
+librerias.h
+/home/angel/Angel Loayza/UCSP/Algebra_Abstracta/RSA/librerias.h
+

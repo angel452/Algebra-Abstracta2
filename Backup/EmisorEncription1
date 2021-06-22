@@ -1,0 +1,38 @@
+        string EmisorEncryption()
+        {
+            cout << "--------------------- DATOS -----------------------------------" << endl;
+            cout << "Tu mensaje es: " << mensaje << endl;
+            cout << "clave publica e: " << e << endl;
+            cout << "n: " << n << endl;
+            cout << "---------------------------------------------------------------" << endl;
+
+            for (int i = 0; i < 6; ++i) //es 6 = mensaje_num.length() / k
+            {
+                string s_num_of_matriz = bloques(i,mensaje,n,alfabeto); //retorna el numero en string
+                int i_num_of_matriz = atoi(s_num_of_matriz.c_str()); //convierto el numero a entero
+
+                cout << "formula: (" << i_num_of_matriz << ")^" << e << " mod " << n << endl;
+
+                string s_aux;
+                int i_aux;
+                i_aux = ModularArithmetic(i_num_of_matriz,e,n); //hago potenciacion modular con el numero
+                s_aux = to_string(i_aux); // lo convierto a string
+
+                // ------------ hacer que sea de tamaño N ------------------
+                int contador;
+                contador = NumberOfDigits(i_aux);
+
+                while ( contador < NumberOfDigits(alfabeto.length()));
+                {
+                    mensaje_cifrado.append("0");
+                    contador++;
+                }
+                // -----------------------------------------------------
+
+                mensaje_cifrado.append(s_aux); //lo aumento en mensaje_cifrado
+            }
+
+            cout << "El mensaje cifrado es: " << mensaje_cifrado << endl;
+
+            return mensaje;
+        }

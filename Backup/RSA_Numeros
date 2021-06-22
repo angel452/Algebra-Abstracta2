@@ -1,0 +1,163 @@
+#include <iostream>
+#include "librerias.h"
+using namespace std;
+
+class RSA
+{
+    private:
+        int d;
+        string alfabeto = "abcdefghijklmnopqrstuvwxyz#";
+
+    public:
+        int n;
+        int e;
+        int mensaje;
+
+        RSA()
+        { }
+
+        RSA(int _n, int _e, int _mensaje)
+        {
+            n = _n;
+            e = _e;
+            mensaje = _mensaje;
+        }
+
+        void GenerateKeys()
+        {
+            int p_0 = 0, q_0 = 0;
+            GK_searchPQ(p_0,q_0);
+            //p_0 = 17;
+            //q_0 = 43;
+
+            //int n;
+            n = GK_searchN(p_0,q_0);
+
+            int fhi;
+            fhi = GK_searchfhi(p_0,q_0);
+
+            //int e;
+            //e = 101;
+            e = GK_searchE(fhi);
+
+            //int d;
+            d = inversa(e,fhi);
+
+            cout << "p: " << p_0 << endl;
+            cout << "q: " << q_0 << endl;
+            cout << "fhi: " << fhi << endl;
+            cout << "---------------------------------------------------------------" << endl;
+            cout << "clave publica e: " << e << endl;
+            cout << "clave privada d:" << d << endl;
+            cout << "n: " << n << endl;
+            cout << "---------------------------------------------------------------"  << endl;
+        }
+
+        int EmisorEncryption()
+        {
+            cout << "--------------------- DATOS -----------------------------------" << endl;
+            cout << "Tu mensaje es: " << mensaje << endl;
+            cout << "clave publica e: " << e << endl;
+            cout << "n: " << n << endl;
+            cout << "---------------------------------------------------------------" << endl;
+
+            cout << "formula: (" << mensaje << ")^" << e << " mod " << n << endl;
+
+            /*
+            int aux = pow(mensaje,e);
+            mensaje = modulo(aux, n);
+            */
+            mensaje = ModularArithmetic(mensaje,e,n);
+
+            cout << "El mensaje cifrado es: " << mensaje << endl;
+
+            return mensaje;
+        }
+
+        int ReceptorDecoded()
+        {
+            int p,q;
+            RE_searchP(n,p,q);
+            /*p = RE_searchP(n);
+            q = RE_searchQ(n);*/
+
+            int fhi;
+            fhi  = GK_searchfhi(p,q);
+
+            //int private_key;
+            //private_key = inversa(e,fhi);
+            d = inversa(e,fhi);
+
+            cout << "--------------------- DATOS -----------------------------------" << endl;
+            cout << "Tu mensaje es: " << mensaje << endl;
+            cout << "p: " << p << endl;
+            cout << "q: " << q << endl;
+            cout << "fhi: " << fhi << endl;
+            cout << "private_key: " << d << endl;
+            cout << "n: " << n << endl;
+            cout << "---------------------------------------------------------------" << endl;
+
+            cout << "formula: (" << mensaje << ")^" << d << " mod " << n << endl;
+            /*
+            int aux = pow(mensaje,d);
+            mensaje = modulo(aux, n);
+            */
+            mensaje = ModularArithmetic(mensaje,d,n);
+
+            cout << "El mensaje descifrado es: " << mensaje << endl;
+
+            return mensaje;
+        }
+};
+
+
+int main()
+{
+    int mensaje;
+    int respuesta;
+    int e, n;
+
+    cout << "----------- Progrmama de criptografia - RSA -------------------" << endl;
+    cout << "Que deseas hacer: " << endl;
+    cout << "Cifrar un mensaje (Emisor) .................................. 1" << endl;
+    cout << "Descifrar un mensaje (Receptor) ............................. 2" << endl;
+    cout << "Crear claves publicas/privadas (Receptor).................... 3" << endl;
+    cout << "Respuesta:  ";
+    cin >> respuesta;
+
+    if(respuesta == 1) //emisor
+    {
+        cout << "Ingrese el mensaje que desea cifrar: ";
+        cin >> mensaje;
+        cout << "-------------------------------------------------------------" << endl;
+        cout << "Ingrese la clave publica e: " << endl;
+        cin >> e;
+        cout << "Ingrese la clave publica n: " << endl;
+        cin >> n;
+
+        RSA emisor(n,e,mensaje);
+        emisor.EmisorEncryption();
+        cout << "-------------------------------------------------------------" << endl;
+    }
+    else if (respuesta == 2) //receptor
+    {
+        cout << "Ingrese el mensaje que desea descifrar: ";
+        cin >> mensaje;
+        cout << "-------------------------------------------------------------" << endl;
+        cout << "Ingrese la clave publica e: " << endl;
+        cin >> e;
+        cout << "Ingrese la clave publica n: " << endl;
+        cin >> n;
+
+        RSA receptor(n,e,mensaje);
+        receptor.ReceptorDecoded();
+        cout << "-------------------------------------------------------------" << endl;
+    }
+
+    else if (respuesta == 3) //generar claves
+    {
+        cout << "-------------- Generando claves publcas ---------------- " << endl;
+        RSA public_key;
+        public_key.GenerateKeys();
+    }
+}
